@@ -12,7 +12,7 @@ security-hardened for public production use.
 Install [Docker](https://docs.docker.com/get-docker/) and run:
 
 ```console
-docker compose up --build
+docker compose up
 ```
 
 Open <http://localhost:8080> and create an account. The database is initialized
