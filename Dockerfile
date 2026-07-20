@@ -7,11 +7,7 @@ RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" \
 
 WORKDIR /var/www/html
 
-COPY --chown=www-data:www-data *.php style_old.css ./
-COPY --chown=www-data:www-data css/ ./css/
-COPY --chown=www-data:www-data favicon/ ./favicon/
-COPY --chown=www-data:www-data img/ ./img/
-COPY --chown=www-data:www-data include/ ./include/
+COPY --chown=www-data:www-data src/ ./
 
 RUN find /var/www/html -type f -name '*.php' -exec php -l {} \;
 
