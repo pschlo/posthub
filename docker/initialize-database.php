@@ -26,9 +26,13 @@ $connection = null;
 
 for ($attempt = 1; $attempt <= 30; $attempt++) {
     try {
-        $connection = new mysqli($host, $user, $password, $database, $port);
+        $connection = @new mysqli($host, $user, $password, $database, $port);
         break;
     } catch (mysqli_sql_exception $exception) {
+        if ($attempt === 1) {
+            fwrite(STDOUT, "Waiting for the Posthub database...\n");
+        }
+
         if ($attempt === 30) {
             fwrite(STDERR, "Could not connect to the Posthub database: {$exception->getMessage()}\n");
             exit(1);
