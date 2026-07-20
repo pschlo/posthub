@@ -11,8 +11,6 @@ if (!isset($_POST["text"]) or !isset($_POST["title"])) {
 $text = $_POST["text"];
 $title = $_POST["title"];
 
-echo $text;
-
 if (empty($text) or empty($title)) {
     header("Location: ../new-post.php?err=emptyInput");
     exit();

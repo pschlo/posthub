@@ -1,0 +1,36 @@
+services:
+  app:
+    build:
+      context: .
+    image: posthub:local
+    ports:
+      - "127.0.0.1:${POSTHUB_PORT:-8080}:80"
+    environment:
+      POSTHUB_DB_HOST: database
+      POSTHUB_DB_PORT: 3306
+      POSTHUB_DB_NAME: posthub
+      POSTHUB_DB_USER: posthub
+      POSTHUB_DB_PASSWORD: ${POSTHUB_DB_PASSWORD:-posthub}
+    depends_on:
+      database:
+        condition: service_healthy
+
+  database:
+    image: mariadb:11.4
+    environment:
+      MARIADB_DATABASE: posthub
+      MARIADB_USER: posthub
+      MARIADB_PASSWORD: ${POSTHUB_DB_PASSWORD:-posthub}
+      MARIADB_RANDOM_ROOT_PASSWORD: "1"
+    volumes:
+      - database-data:/var/lib/mysql
+      - ./docker/mariadb/init.sql:/docker-entrypoint-initdb.d/01-posthub.sql:ro
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+      start_period: 10s
+
+volumes:
+  database-data:
