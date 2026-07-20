@@ -4,13 +4,13 @@ services:
       context: .
     image: posthub:local
     ports:
-      - "127.0.0.1:${POSTHUB_PORT:-8080}:80"
+      - "127.0.0.1:8080:80"
     environment:
       POSTHUB_DB_HOST: database
       POSTHUB_DB_PORT: 3306
       POSTHUB_DB_NAME: posthub
       POSTHUB_DB_USER: posthub
-      POSTHUB_DB_PASSWORD: ${POSTHUB_DB_PASSWORD:-posthub}
+      POSTHUB_DB_PASSWORD: posthub
     depends_on:
       database:
         condition: service_healthy
@@ -20,7 +20,7 @@ services:
     environment:
       MARIADB_DATABASE: posthub
       MARIADB_USER: posthub
-      MARIADB_PASSWORD: ${POSTHUB_DB_PASSWORD:-posthub}
+      MARIADB_PASSWORD: posthub
       MARIADB_RANDOM_ROOT_PASSWORD: "1"
     volumes:
       - database-data:/var/lib/mysql

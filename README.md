@@ -18,15 +18,6 @@ docker compose up --build
 Open <http://localhost:8080> and create an account. The database is initialized
 automatically and stored in a Docker volume.
 
-Stop the application with `Ctrl+C`, followed by:
-
-```console
-docker compose down
-```
-
-To change the local port or database password, copy `.env.example` to `.env`
-and edit the values before starting Compose.
-
 ## Container image
 
 Pull requests verify that the image builds. Changes to `master` publish
