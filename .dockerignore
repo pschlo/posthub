@@ -5,4 +5,4 @@
 .env
 Dockerfile
 README.md
-compose.yaml
+compose.yml

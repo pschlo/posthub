@@ -10,7 +10,7 @@ security-hardened for public production use.
 ## Run locally
 
 Install [Docker](https://docs.docker.com/get-docker/), copy
-[`compose.yaml`](compose.yaml) into an empty directory, and run:
+[`compose.yml`](compose.yml) into an empty directory, and run:
 
 ```console
 docker compose up
