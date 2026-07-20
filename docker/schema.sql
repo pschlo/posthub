@@ -1,4 +1,4 @@
-CREATE TABLE users (
+CREATE TABLE IF NOT EXISTS users (
     user_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
     prename VARCHAR(100) NOT NULL,
     surname VARCHAR(100) NOT NULL,
@@ -10,7 +10,7 @@ CREATE TABLE users (
     UNIQUE KEY users_email_unique (email)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-CREATE TABLE posts (
+CREATE TABLE IF NOT EXISTS posts (
     post_id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
     timestamp DATETIME NOT NULL,
     author_id INT UNSIGNED NOT NULL,
@@ -22,7 +22,7 @@ CREATE TABLE posts (
         FOREIGN KEY (author_id) REFERENCES users (user_id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-CREATE TABLE following (
+CREATE TABLE IF NOT EXISTS following (
     user_id INT UNSIGNED NOT NULL,
     following_id INT UNSIGNED NOT NULL,
     PRIMARY KEY (user_id, following_id),

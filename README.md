@@ -9,14 +9,15 @@ security-hardened for public production use.
 
 ## Run locally
 
-Install [Docker](https://docs.docker.com/get-docker/) and run:
+Install [Docker](https://docs.docker.com/get-docker/), copy
+[`compose.yaml`](compose.yaml) into an empty directory, and run:
 
 ```console
 docker compose up
 ```
 
-Open <http://localhost:8080> and create an account. The database is initialized
-automatically and stored in a Docker volume.
+Open <http://localhost:8080> and create an account. The application initializes
+the database automatically and stores it in a Docker volume.
 
 ## Container image
 

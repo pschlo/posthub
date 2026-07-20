@@ -8,8 +8,15 @@ RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" \
 WORKDIR /var/www/html
 
 COPY --chown=www-data:www-data src/ ./
+COPY docker/schema.sql docker/initialize-database.php /usr/local/share/posthub/
+COPY docker/entrypoint.sh /usr/local/bin/posthub-entrypoint
 
-RUN find /var/www/html -type f -name '*.php' -exec php -l {} \;
+RUN chmod 0755 /usr/local/bin/posthub-entrypoint \
+    && php -l /usr/local/share/posthub/initialize-database.php \
+    && find /var/www/html -type f -name '*.php' -exec php -l {} \;
+
+ENTRYPOINT ["posthub-entrypoint"]
+CMD ["apache2-foreground"]
 
 EXPOSE 80
 
